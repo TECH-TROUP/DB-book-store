@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`books` (
   `stock` INT NULL DEFAULT '0',
   `available` TINYINT NULL DEFAULT '0',
   `category_id` INT NULL DEFAULT NULL,
+  `image_url` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`roles` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `role_name_UNIQUE` (`role_name` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`users` (
     FOREIGN KEY (`role_id`)
     REFERENCES `book_store_db`.`roles` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
