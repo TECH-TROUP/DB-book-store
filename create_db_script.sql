@@ -18,39 +18,36 @@ CREATE SCHEMA IF NOT EXISTS `book_store_db` DEFAULT CHARACTER SET utf8mb4 COLLAT
 USE `book_store_db` ;
 
 -- -----------------------------------------------------
--- Table `book_store_db`.`categories`
+-- Table `book_store_db`.`statuses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `book_store_db`.`categories` (
+CREATE TABLE IF NOT EXISTS `book_store_db`.`statuses` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `category_name` VARCHAR(100) NOT NULL,
+  `label` VARCHAR(255) NOT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `color` VARCHAR(45) NULL DEFAULT NULL,
+  `bg_color` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `category_name_UNIQUE` (`category_name` ASC) VISIBLE)
+  UNIQUE INDEX `label_UNIQUE` (`label` ASC) VISIBLE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `book_store_db`.`books`
+-- Table `book_store_db`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `book_store_db`.`books` (
+CREATE TABLE IF NOT EXISTS `book_store_db`.`categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(100) NOT NULL,
-  `author` VARCHAR(100) NOT NULL,
-  `price` DECIMAL(10,2) NOT NULL,
+  `category_name` VARCHAR(100) NOT NULL,
   `description` TEXT NULL DEFAULT NULL,
-  `stock` INT NULL DEFAULT '0',
-  `available` TINYINT NULL DEFAULT '0',
-  `category_id` INT NULL DEFAULT NULL,
-  `image_url` VARCHAR(255) NULL DEFAULT NULL,
+  `count` INT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
-  CONSTRAINT `category_id`
-    FOREIGN KEY (`category_id`)
-    REFERENCES `book_store_db`.`categories` (`id`))
+  UNIQUE INDEX `category_name_UNIQUE` (`category_name` ASC) VISIBLE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -89,7 +86,64 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`users` (
     FOREIGN KEY (`role_id`)
     REFERENCES `book_store_db`.`roles` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 15
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `book_store_db`.`books`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `book_store_db`.`books` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `author` VARCHAR(100) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `stock` INT NULL DEFAULT '0',
+  `category_id` INT NULL DEFAULT NULL,
+  `image_url` VARCHAR(255) NULL DEFAULT NULL,
+  `vendor_id` INT NOT NULL,
+  `status_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
+  INDEX `vendor_id_idx` (`vendor_id` ASC) VISIBLE,
+  INDEX `book_status_id_idx` (`status_id` ASC) VISIBLE,
+  CONSTRAINT `book_status_id`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `book_store_db`.`statuses` (`id`),
+  CONSTRAINT `category_id`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `book_store_db`.`categories` (`id`),
+  CONSTRAINT `vendor_id`
+    FOREIGN KEY (`vendor_id`)
+    REFERENCES `book_store_db`.`users` (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 28
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `book_store_db`.`book_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `book_store_db`.`book_status` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `book_id` INT NOT NULL,
+  `status_id` INT NOT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `book_id_idx` (`book_id` ASC) VISIBLE,
+  INDEX `status_id_idx` (`status_id` ASC) VISIBLE,
+  CONSTRAINT `individual_book_id`
+    FOREIGN KEY (`book_id`)
+    REFERENCES `book_store_db`.`books` (`id`),
+  CONSTRAINT `status_id`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `book_store_db`.`statuses` (`id`))
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
