@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`users` (
     FOREIGN KEY (`role_id`)
     REFERENCES `book_store_db`.`roles` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 24
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`books` (
     FOREIGN KEY (`vendor_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 46
+AUTO_INCREMENT = 48
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`book_copies` (
     FOREIGN KEY (`status_id`)
     REFERENCES `book_store_db`.`statuses` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 254
+AUTO_INCREMENT = 407
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`cart` (
     FOREIGN KEY (`user_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 91
+AUTO_INCREMENT = 126
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`payments` (
     FOREIGN KEY (`user_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`orders` (
     FOREIGN KEY (`user_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`order_items` (
     FOREIGN KEY (`order_id`)
     REFERENCES `book_store_db`.`orders` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 20
+AUTO_INCREMENT = 43
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`reviews` (
     FOREIGN KEY (`user_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -335,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `book_store_db`.`wishlist` (
     FOREIGN KEY (`user_id`)
     REFERENCES `book_store_db`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 75
+AUTO_INCREMENT = 81
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
