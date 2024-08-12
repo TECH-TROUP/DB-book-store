@@ -20,3 +20,16 @@ INSERT INTO roles (id, role_name) VALUES
 (2, 'Customer'),
 (3, 'Vendor');
 
+-- To add statuses to order_statuses table
+INSERT INTO order_statuses (id, label, description) VALUES
+(1, 'pending', 'The order is awaiting processing.'),
+(2, 'processing', 'The order is being processed or packed.'),
+(3, 'shipped', 'The order is in transit to the customer.'),
+(4, 'delivered', 'The order has been delivered.'),
+(5, 'completed', 'The order has been completed.'),
+(6, 'cancelled', 'The order has been cancelled.'),
+(7, 'returned', 'The order has been returned.'),
+(8, 'refunded', 'The payment has been refunded.'),
+(9, 'failed', 'The order processing failed.');
+
+
